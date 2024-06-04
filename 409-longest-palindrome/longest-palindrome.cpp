@@ -1,25 +1,20 @@
 class Solution {
 public:
     int longestPalindrome(string s) {
-       unordered_map<char, int> appear;
-        for (int i = 0; i < s.size(); i++) {
-            appear[s[i]]++;
-        }
-        int length = 0;
-        bool remains = false; 
-        for (auto& count : appear) {
-            if (count.second % 2 == 0) {
-                length += count.second;
+         stack<char> st;
+        sort(s.begin() , s.end());
+        for (char c : s) {
+            if (!st.empty() && st.top() == c) {
+                st.pop();
             } else {
-                length += count.second - 1; 
-                remains = true;
+                st.push(c);
             }
         }
-
-        if (remains) {
-            length += 1; 
-        }
-
+        int unmatched = st.size();
+        int length = s.size() - unmatched;
+        if (unmatched > 0) {
+            length += 1;
+        }    
         return length;
     }
 };
