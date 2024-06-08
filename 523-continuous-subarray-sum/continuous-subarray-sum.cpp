@@ -1,23 +1,24 @@
-class Solution {
+  class Solution {
 public:
     bool checkSubarraySum(vector<int>& nums, int k) {
-        int n = nums.size();
-        if (n < 2) return false;
-        unordered_map<int, int> modIndexMap; 
-        modIndexMap[0] = -1; 
-        int prefixSum = 0;
-        for (int i = 0; i < n; i++) {
-            prefixSum += nums[i];
-            int currMod = (k == 0) ? prefixSum : (prefixSum % k);
-
-            if (modIndexMap.find(currMod) != modIndexMap.end()) {
-                if (i - modIndexMap[currMod] > 1) {
+        int Sum = nums[0];     
+        for (int i = 1; i < nums.size(); i++) {
+            if (nums[i - 1] == 0 && nums[i] == 0) {
+                return true;      
+            }
+            Sum += nums[i];         
+            if (Sum % k == 0)    
+                return true;      
+            int j = 0;
+            int tempSum = Sum;         
+            while ((i - j) > 1 && tempSum >= k) {
+                tempSum -= nums[j];
+                j++;               
+                if (tempSum % k == 0) {
                     return true;
                 }
-            } else {
-                modIndexMap[currMod] = i;
             }
         }
-        return false;
+      return false;
     }
 };
