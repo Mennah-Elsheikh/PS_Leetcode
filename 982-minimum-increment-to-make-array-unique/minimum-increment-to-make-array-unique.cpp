@@ -1,6 +1,8 @@
 class Solution {
 public:
     int minIncrementForUnique(vector<int>& nums) {
+        ios::sync_with_stdio(false);
+        cin.tie(nullptr);
         /*
         [1 , 2 , 2] => [1 , 2 , 3]
         [3 , 2 , 1 , 2 , 1 , 7 ] => [ 3 , 4 , 1 , 2 , 5 , 7]
