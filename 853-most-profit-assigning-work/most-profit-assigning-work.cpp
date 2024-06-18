@@ -8,8 +8,9 @@ public:
         sort(jobs.begin(), jobs.end());
         sort(worker.begin(), worker.end());   
         int max_profit = 0, ans = 0, j = 0;
-        for (int i = 0; i < worker.size(); ++i) {
-            while (j < jobs.size() && worker[i] >= jobs[j].first) {
+        int n = worker.size() , m = jobs.size();
+        for (int i = 0; i < n ; ++i) {
+            while (j < m && worker[i] >= jobs[j].first) {
                 max_profit = max(max_profit, jobs[j].second);
                 ++j;
             }
