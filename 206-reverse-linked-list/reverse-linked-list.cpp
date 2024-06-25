@@ -11,18 +11,12 @@
 class Solution {
 public:
     ListNode* reverseList(ListNode* head) {
+        // If the list is empty or has only one node, no need to reverse
         if (head == nullptr || head->next == nullptr)
-            return head;
-        ListNode* previous = nullptr;
-        ListNode* current = head;
-        ListNode* point = nullptr ; 
-        while (current)
-        {
-            point = current->next;
-            current->next = previous;
-            previous = current;
-            current = point;
-        }
-        return previous;
+            return head;  
+       ListNode* reversedlisthead = reverseList(head->next);
+       head->next->next = head;
+       head->next = nullptr;
+       return reversedlisthead ;
     }
 };
