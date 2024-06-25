@@ -11,27 +11,18 @@
 class Solution {
 public:
     ListNode* reverseList(ListNode* head) {
-        // If the list is empty or has only one node, no need to reverse
         if (head == nullptr || head->next == nullptr)
             return head;
-        
         ListNode* previous = nullptr;
         ListNode* current = head;
-        ListNode* next_node = nullptr;
-        
-        while (current != nullptr) {
-            // Store the next node
-            next_node = current->next;
-            // Reverse the current node's pointer
+        ListNode* point = nullptr ; 
+        while (current)
+        {
+            point = current->next;
             current->next = previous;
-            // Move pointers one step forward
             previous = current;
-            current = next_node;
+            current = point;
         }
-        
-        // The new head of the reversed list is the last node processed
-        head = previous;
-        
-        return head;
+        return previous;
     }
 };
