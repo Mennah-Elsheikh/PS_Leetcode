@@ -11,41 +11,35 @@
  */
 class Solution {
 public:
+    struct NodeInfo {
+        TreeNode* parent;
+        int depth;
+    };
+
+    void dfs(TreeNode* node, TreeNode* parent, int depth, int val, NodeInfo &info) {
+        if (!node) {
+            return;
+        }
+        if (node->val == val) {
+            info = {parent, depth};
+            return;
+        }
+        dfs(node->left, node, depth + 1, val, info);
+        dfs(node->right, node, depth + 1, val, info);
+    }
+
     bool isCousins(TreeNode* root, int x, int y) {
-        if (!root) return false;
-
-        queue<pair<TreeNode*, TreeNode*>> q; // {node, parent}
-        q.push({root, nullptr});
-
-        TreeNode* xParent = nullptr;
-        TreeNode* yParent = nullptr;
-        int xDepth = -1;
-        int yDepth = -1;
-        int depth = 0;
-
-        while (!q.empty()) {
-            int size = q.size();
-            for (int i = 0; i < size; ++i) {
-                auto [node, parent] = q.front();
-                q.pop();
-
-                if (node->val == x) {
-                    xParent = parent;
-                    xDepth = depth;
-                }
-                if (node->val == y) {
-                    yParent = parent;
-                    yDepth = depth;
-                }
-
-                if (node->left) q.push({node->left, node});
-                if (node->right) q.push({node->right, node});
-            }
-            
-            if (xParent && yParent) break;
-            depth++;
+        if (!root) {
+            return false;
         }
 
-        return (xDepth == yDepth) && (xParent != yParent);
+        NodeInfo infoX = {nullptr, 0};
+        NodeInfo infoY = {nullptr, 0};
+
+        dfs(root, nullptr, 0, x, infoX);
+        dfs(root, nullptr, 0, y, infoY);
+
+        // Check if the nodes are at the same depth but have different parents
+        return (infoX.depth == infoY.depth) && (infoX.parent != infoY.parent);
     }
 };
