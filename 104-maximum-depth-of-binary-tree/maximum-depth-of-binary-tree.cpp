@@ -9,13 +9,28 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
-class Solution {
-public:
-    int maxDepth(TreeNode* root) {
-        if (!root)
-                return 0;
-            int left_depth = maxDepth(root->left);
-            int right_depth = maxDepth(root->right);
-            return max(left_depth, right_depth) + 1;
-    }
-};
+class Solution
+    {
+    public:
+        int maxDepth(TreeNode *root)
+        {
+            int maxDepth = 0; // Initialize the maximum depth
+            int count = 0;    // Initialize the current depth counter
+            dfs(root, count, maxDepth);
+            return maxDepth;
+        }
+
+    private:
+        void dfs(TreeNode *node, int count, int &maxDepth)
+        {
+            if (node == NULL)
+                return;
+            count++; // Increment counter to reflect current depth
+            if (count > maxDepth)
+            {
+                maxDepth = count; // Update maximum depth
+            }
+            dfs(node->left, count, maxDepth);
+            dfs(node->right, count, maxDepth);
+        }
+    };
