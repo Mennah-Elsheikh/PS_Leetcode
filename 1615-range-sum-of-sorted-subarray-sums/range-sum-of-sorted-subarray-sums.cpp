@@ -11,7 +11,7 @@ public:
         }
         nth_element(sum.begin(), sum.begin() + left - 1, sum.end());
         nth_element(sum.begin() + left - 1, sum.begin() + right, sum.end());
-        //sort(sum.begin() + left - 1, sum.begin() + right);
+        sort(sum.begin() + left - 1, sum.begin() + right);
         int ans = 0;
         int MOD = 1000000007;
         for (int i = left - 1; i < right; i++) {
