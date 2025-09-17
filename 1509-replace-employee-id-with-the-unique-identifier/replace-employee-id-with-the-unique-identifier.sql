@@ -1,5 +1,5 @@
-/* Write your T-SQL query statement below */
-select EmployeeUNI.unique_id , Employees.name 
-from Employees
-LEFT JOIN EmployeeUNI 
-on Employees.id = EmployeeUNI.id ; 
+# Write your MySQL query statement below
+select ue.unique_id , e.name 
+from EmployeeUNI as ue
+right join Employees as e 
+on e.id = ue.id ;
